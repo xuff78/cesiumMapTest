@@ -1,0 +1,883 @@
+body{
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+/******* overflow ********/
+::-webkit-scrollbar-track-piece{
+    background-color:#fff;
+    -webkit-border-radius:0;
+}
+::-webkit-scrollbar{
+    width:8px;
+    height:8px;
+}
+::-webkit-scrollbar-thumb{
+    height:50px;
+    background-color:#999;
+    -webkit-border-radius:4px;
+    outline:2px solid #fff;
+    outline-offset:-2px;
+    border: 2px solid #fff;
+}
+::-webkit-scrollbar-thumb:hover{
+    height:50px;
+    background-color:#9f9f9f;
+    -webkit-border-radius:4px;
+}
+/******* navigation ********/
+.cfglobe-navigation{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 100px;
+}
+/******* infoBox ********/
+.cfglobe-infoBox{
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 40%;
+    max-width: 500px;
+    min-height: 20px;
+	background: rgba(38,38,38,0.95);
+    color: #edffff;
+    border: 1px solid #444;
+    border-right: none;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    box-shadow: 0 0 10px 1px #000;
+    opacity: 0;
+}
+.cfglobe-infoBox-title{
+	height: 20px;
+    padding: 5px 30px 5px 25px;
+    background: rgba(84,84,84,1.0);
+    border-top-left-radius: 7px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+.cfglobe-infoBox-close{
+	display: block;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0 5px;
+    margin: 0;
+    color: #edffff;
+}
+/******* nav-angle ********/
+.cfglobe-nav-div{
+    width: 100%;
+    height: 100%;
+	z-index: -1000;
+}
+.cfglobe-nav-angle{
+    margin-top: 60px;
+    margin-left: 25px;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+.cesium-viewer-navigationContainer:hover .cfglobe-nav-div{ 
+	filter:alpha(Opacity=0);
+	-moz-opacity:0;
+	opacity: 0;
+}
+/******* toolset ********/
+.cfglobe-toolset-top-hide{
+	position: absolute;
+	top: 0;
+	right: 220px;
+	min-width: 300px;
+	max-width: 800px;
+	height: 0;
+    /*padding: 0 20px;*/
+	border-radius: 0 0 .375rem .375rem;
+    border-top: none;
+    overflow: hidden;
+    background: rgba(42, 42, 42, 0.6);
+    color: white;
+	-webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+.cfglobe-toolset-top-show{
+	position: absolute;
+	top: 0;
+	right: 220px;
+	min-width: 300px;
+	max-width: 800px;
+    padding: 5px 10px;
+	border-radius: 0 0 .375rem .375rem;
+    border-top: none;
+    overflow: hidden;
+    background: rgba(42, 42, 42, 0.6);
+    color: white;
+	-webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+.cfglobe-toolset-top-hide input{
+	margin-right: 10px;
+	width: 80px;
+	color: black;
+}
+.cfglobe-toolset-top-show input{
+	margin-right: 10px;
+	width: 80px;
+	color: black;
+    height: 21px;
+    font-size: 14px;
+}
+.cfglobe-toolset-top-show select{
+	margin-right: 10px;
+	color: black;
+}
+
+.cfglobe-toolset{
+	position: absolute;
+    top: 0;
+    bottom: 27px;
+    right: 0;
+	width: 0;
+	padding-top: 10px;
+	border-radius: .375rem 0 0 .375rem;
+    border-right: none;
+    background: rgba(42, 42, 42, 0.6);
+    overflow-y: auto;
+    overflow-x: hidden;
+	-webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+.cfglobe-toolset-open{
+	position: absolute;
+    top: 0;
+    bottom: 27px;
+    right: 0;
+	width: 180px;
+	padding-top: 10px;
+    background: rgba(42, 42, 42, 0.6);
+    overflow-y: auto;
+    overflow-x: hidden;
+	-webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+
+.cfglobe-toolset-list{
+	height: 50px;
+	line-height: 50px;
+	color: white;
+	overflow: hidden;
+}
+.cfglobe-toolset-list:hover{
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.cfglobe-toolset-list img{
+	display: block;
+	float: left;
+	width: 30px;
+	height: 30px;
+	margin: 10px 20px;
+	cursor: pointer;
+    border: 0;
+}
+.cfglobe-toolset-list img:hover{
+	background-color: #4488bb;
+    border: 1px solid #aaeeff;
+    border-radius: 6px;
+    color: #fff;
+    fill: #fff; 
+    box-shadow: 0 0 8px #fff;
+}
+/*
+.cfglobe-toolset-list button{
+	display: block;
+	float: left;
+	width: 30px;
+	height: 30px;
+	margin: 10px 20px;
+	cursor: pointer;
+    border: 0;
+}
+.cfglobe-toolset-list button:hover{
+	background-color: #4488bb;
+    border: 1px solid #aaeeff;
+    border-radius: 6px;
+    color: #fff;
+    fill: #fff; 
+    box-shadow: 0 0 8px #fff;
+}
+.cfglobe-toolset-list button:focus{
+	outline: none;
+} 
+.cfglobe-toolset-btn-open{
+	background: url('../img/toolset_open.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-close{
+	background: url('../img/toolset_close.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-globe{
+	background: url('../img/toolset_globe.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-measure{
+	background: url('../img/toolset_measure.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-location{
+	background: url('../img/toolset_location.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-analysis{
+	background: url('../img/toolset_analysis.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-viewing{
+	background: url('../img/toolset_rotate.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-rotate{
+	background: url('../img/toolset_rotate.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-north{
+	background: url('../img/toolset_north.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-overlooking{
+	background: url('../img/toolset_overlooking.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-ellipse{
+	background: url('../img/toolset_ellipse.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-angle{
+	background: url('../img/toolset_angle.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-path{
+	background: url('../img/toolset_path.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-sunshine{
+	background: url('../img/toolset_sunshine.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-2d{
+	background: url('../img/toolset_2d.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-3d{
+	background: url('../img/toolset_3d.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-shp{
+	background: url('../img/toolset_shp.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-clear{
+	background: url('../img/toolset_clear.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-csv{
+	background: url('../img/toolset_csv.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-address{
+	background: url('../img/toolset_address.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-print{
+	background: url('../img/toolset_print.png') no-repeat 50% 50%;
+}
+.cfglobe-toolset-btn-transforming{
+	background: url('../img/toolset_transforming.png') no-repeat 50% 50%;
+}*/
+.cfglobe-toolset-span{
+	cursor: pointer;
+}
+.cfglobe-toolset-top-shp-div{
+	border-top: 1px solid white;
+    margin-top: 5px;
+    padding: 5px;
+    /*height: 30px;
+    line-height: 30px;*/
+}
+.cfglobe-toolset-top-shp-div:after{
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+.cfglobe-toolset-top-shp-div span{
+	margin-left: 10px;
+    line-height: 30px;
+}
+.cfglobe-toolset-top-shp-div button{
+	float: right;
+	background: #303336;
+    border: 1px solid #444;
+    color: #edffff;
+    fill: #edffff;
+    border-radius: 4px;
+    padding: 5px 12px;
+    margin: 2px 3px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.cfglobe-toolset-top-shp-div button:hover {
+    color: #fff; /* For text buttons */
+    fill: #fff; /* For SVG buttons */
+    background: #48b;
+    border-color: #aef;
+    box-shadow: 0 0 8px #fff;
+}
+
+.cfglobe-toolset-top-title{
+	height: 30px;
+	border-bottom: 1px solid white;
+}
+.cfglobe-toolset-top-title-img{
+    float: left;
+    height: 20px;
+    width: 20px;
+    border: none;
+    margin: 5px;
+}
+.cfglobe-toolset-top-title-x{
+    display: block;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
+}
+.cfglobe-toolset-top-title span{
+    display: block;
+    float: left;
+    margin-top: 4px;
+}
+.cfglobe-toolset-top-info{
+	padding: 10px;
+}
+.cfglobe-toolset-top-info:after{
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+.cfglobe-toolset-top-info-radio{
+	height: 40px;
+	border-bottom: 1px solid white;
+    margin-bottom: 10px;
+}
+
+.cfglobe-toolset-top-transforming {
+    min-width: 300px;
+    max-width: 800px;
+    padding: 5px 10px;
+    border-radius: 0 0 .375rem .375rem;
+    border-top: none;
+    overflow: hidden;
+    background: rgba(42, 42, 42, 0.6);
+    color: white;
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+
+.cfglobe-toolset-top-transforming input{
+	color: black;
+}
+.cfglobe-toolset-top-transforming select{
+	color: black;
+}
+.cfglobe-toolset-top-transforming-left{
+	float: left;
+	padding: 10px;
+	border: 1px solid white;
+	width: 225px;
+}
+.cfglobe-toolset-top-transforming-right{
+	float: left;
+	margin-left: 20px;
+}
+.cfglobe-toolset-top-transforming-right .top{
+	padding: 10px;
+	border: 1px solid white;
+}
+.cfglobe-toolset-top-transforming-right .bottom{
+	margin-top: 10px;
+}
+.cfglobe-toolset-top-transforming-right .bottom .left{
+	float: left;
+}
+.cfglobe-toolset-top-transforming-right .bottom .left button{
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+.cfglobe-toolset-top-transforming-right .bottom .right{
+	float: left;
+	border: 1px solid white;
+}
+
+/******* infoWindow ********/
+.cfglobe-infowindow{
+    position: absolute;
+    text-align: center;
+}
+.cfglobe-infowindow-close-button{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 4px 4px 0 0;
+    text-align: center;
+    width: 18px;
+    height: 14px;
+    font: 16px/14px Tahoma, Verdana, sans-serif;
+    color: #c3c3c3;
+    text-decoration: none;
+    font-weight: bold;
+    background: transparent;
+    cursor: pointer;
+}
+.cfglobe-infowindow-content-wrapper{
+    min-width: 200px;
+    min-height: 100px;
+    background: rgba(42, 42, 42, 0.6);
+    color: white;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+    padding: 1px;
+    text-align: left;
+    border-radius: 12px;
+}
+.cfglobe-infowindow-content{
+    line-height: 1.4;
+}
+.cfglobe-infowindow-tip-container{
+    margin: 0 auto;
+    width: 40px;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.cfglobe-infowindow-tip{
+    background: rgba(42, 42, 42, 0.6);
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+    width: 17px;
+    height: 17px;
+    padding: 1px;
+    margin: -10px auto 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.cfglobe-infowindow-title{
+	padding: 5px 20px 5px 5px;
+    height: 30px;
+	border-bottom: 1px solid black;
+}
+.cfglobe-infowindow-des{
+	padding: 5px;
+    max-height: 300px;
+    max-width: 500px;
+}
+.cfglobe-infowindow-bot{
+    height: 10px;
+}
+/******* infoMenu ********/
+.cfglobe-infomenu{
+    position: absolute;
+    text-align: center;
+    top:5px;
+    left:0;
+}
+.cfglobe-infomenu-close-button{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    text-align: center;
+    width: 18px;
+    height: 14px;
+    font: 16px/14px Tahoma, Verdana, sans-serif;
+    color: #c3c3c3;
+    text-decoration: none;
+    font-weight: bold;
+    background: transparent;
+}
+.cfglobe-infomenu-close-button:hover{
+	color: white;
+}
+.cfglobe-infomenu-content-wrapper{
+    min-width: 150px;
+    min-height: 60px;
+    background: rgba(42, 42, 42, 0.6);
+    color: white;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+    padding: 1px;
+    text-align: left;
+    border-radius: 12px;
+}
+.cfglobe-infomenu-content{
+    line-height: 1.4;
+    padding: 5px 10px;
+}
+.cfglobe-infomenu-content:after{
+    clear: both;
+    content: '.';
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.cfglobe-infomenu-top{
+	height: 10px;
+}
+.cfglobe-infomenu-des{
+	padding: 5px;
+    max-height: 300px;
+    max-width: 500px;
+    overflow-y: auto;
+}
+.cfglobe-infomenu-bot{
+    height: 10px;
+}
+.cfglobe-infomenu-content-div{
+    width: 100%;
+    height: 28px;
+    border-radius: 6px;
+}
+.cfglobe-infomenu-content-div:hover{
+    background-color: #4488bb;
+    border: 1px solid #aaeeff;
+    color: #fff;
+    fill: #fff; 
+    box-shadow: 0 0 8px #fff;
+}
+.cfglobe-infomenu-content-div:after{
+    clear: both;
+    content: '.';
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.cfglobe-infomenu-content-div img{
+    display: block;
+	float: left;
+	width: 20px;
+	height: 20px;
+	margin-top: 2px;
+	margin-right: 10px;
+}
+.cfglobe-infomenu-content-div div{
+    display: block;
+	float: left;
+	width: 20px;
+	height: 20px;
+	margin-top: 2px;
+	margin-right: 10px;
+}
+.cfglobe-infomenu-content-div span{
+    display: block;
+	float: left;
+}
+/*.cfglobe-infomenu-icon-accept{
+	background: url('../img/menu_accept.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-add{
+	background: url('../img/menu_add.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-ban{
+	background: url('../img/menu_ban.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-date{
+	background: url('../img/menu_date.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-delete{
+	background: url('../img/menu_delete.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-find{
+	background: url('../img/menu_find.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-home{
+	background: url('../img/menu_home.png') no-repeat 50% 50%;
+	background-size: cover;
+}
+.cfglobe-infomenu-icon-i{
+	background: url('../img/menu_i.png') no-repeat 50% 50%;
+	background-size: cover;
+}
+.cfglobe-infomenu-icon-jigsaw{
+	background: url('../img/menu_jigsaw.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-left{
+	background: url('../img/menu_left.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-mail{
+	background: url('../img/menu_mail.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-print{
+	background: url('../img/menu_print.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-right{
+	background: url('../img/menu_right.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-shield{
+	background: url('../img/menu_shield.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-star{
+	background: url('../img/menu_star.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-statistics{
+	background: url('../img/menu_statistics.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-time{
+	background: url('../img/menu_time.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-warning{
+	background: url('../img/menu_warning.png') no-repeat 50% 50%;
+}
+.cfglobe-infomenu-icon-edit{
+	background: url('../img/menu_edit.png') no-repeat 50% 50%;
+}*/
+/******* bottom-info ********/
+.cfglobe-bottom-info{
+	position: absolute;
+    left: 199px;
+    right: 0;
+    bottom: 0;
+    height: 26px;
+    line-height: 26px;
+    background: rgba(42, 42, 42, 0.6);
+    font-size: 13px;
+    color: #e3ddd8;
+    border-top:1px solid white;
+    border-left:1px solid white;
+}
+.cfglobe-bottom-info-left{
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 420px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.cfglobe-bottom-info-right{
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 400px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+}
+/******* layer-manager ********/
+.cfglobe-layer-manager-bottom{
+	position: absolute;
+    left: 0;
+    width: 200px;
+    bottom: 0;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    background: rgba(42, 42, 42, 0.6);
+    font-size: 13px;
+    color: #e3ddd8;
+    border-top:1px solid white;
+    cursor: pointer;
+}
+.cfglobe-layer-manager-top-hide{
+	position: absolute;
+    bottom: 26px;
+    height: 0;
+    left: 0;
+    width: 200px;
+    background: rgba(42, 42, 42, 0.6);
+    color: white;
+    overflow: hidden;
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+.cfglobe-layer-manager-top-show{
+	position: absolute;
+    bottom: 26px;
+    height: 60%;
+    left: 0;
+    width: 200px;
+    background: rgba(42, 42, 42, 0.6);
+    color: white;
+    overflow-y: auto;
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+
+
+
+
+.cfglobe-layer-manager-hide{
+	position: absolute;
+    top: 0;
+    bottom: 26px;
+    left: -180px;
+    width: 200px;
+    background: rgba(42, 42, 42, 0.6);
+    color: white;
+    overflow: hidden;
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+.cfglobe-layer-manager-show{
+	position: absolute;
+    top: 0;
+    bottom: 26px;
+    left: 0;
+    width: 200px;
+    background: rgba(42, 42, 42, 0.6);
+    color: white;
+    overflow: hidden;
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+.cfglobe-layer-manager-left{
+	float: left;
+	width: 180px;
+	height: 100%;
+	border-right: 1px solid white;
+}
+.cfglobe-layer-manager-right{
+	float: left;
+	width: 19px;
+	height: 100%;
+	text-align: center;
+	transform: translateY(40%);
+	cursor: pointer;
+}
+.cfglobe-layer-manager-right:hover{
+	color: #4488bb;
+}
+.cfglobe-layer-manager-title{
+	position: absolute;
+    top: 0;
+    width: 180px;
+	height: 35px;
+	line-height: 35px;
+    text-align: center;
+    border-bottom: 1px solid white;
+}
+.cfglobe-layer-manager-list{
+	border-top: 1px solid white;
+    border-right: 1px solid white;
+    padding-top: 5px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.cfglobe-layer-info{
+	height: 35px;
+	line-height: 35px;
+	border-top: 1px solid white;
+}
+.cfglobe-layer-info input{
+    float: left;
+	vertical-align: middle;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 11px 10px;
+}
+.cfglobe-layer-info span{
+	display: block;
+    float: left;
+    width: 90px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.cfglobe-layer-info button{
+    display: inline-block;
+    float: right;
+    position: relative;
+    background: #303336;
+    border: 1px solid #444;
+    color: #edffff;
+    fill: #edffff;
+    border-radius: 4px;
+    padding: 5px 12px;
+    margin: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 27px;
+    font-size: 13px;
+    line-height: 16px;
+}
+.cfglobe-layer-info button:hover {
+    color: #fff;
+    fill: #fff;
+    background: #48b;
+    border-color: #aef;
+    box-shadow: 0 0 8px #fff;
+}
+.cfglobe-layer-list{
+	width: 180px;
+	/*height: 30px;*/
+	line-height: 30px;
+	margin-left: 10px;
+	overflow: hidden;
+}
+.cfglobe-layer-list input{
+    float: left;
+	vertical-align: middle;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 11px;
+}
+.cfglobe-layer-list span{
+	display: block;
+    float: left;
+    width: 140px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+    cursor: pointer;	
+}
+.cfglobe-layer-list-catalog{
+	width: 170px;
+	height: 30px;
+	line-height: 30px;
+	margin-left: 10px;
+	overflow: hidden;
+}
+.cfglobe-layer-list-catalog input{
+    float: left;
+	vertical-align: middle;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 11px;
+}
+.cfglobe-layer-list-catalog span{
+	display: block;
+    float: left;
+    width: 130px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+    cursor: pointer;	
+}
