@@ -27,7 +27,7 @@ export default {
         }
         let layers = this.viewer.imageryLayers
         let googleMap = new Cesium.UrlTemplateImageryProvider({
-            url : this.config.GOOGLEMAP
+            url : this.config.TDT_VEC
         });
         let googleMapLayer = layers.addImageryProvider(googleMap)
         let startTime = new Date().getTime() + 'a' + parseInt(100*Math.random())
@@ -41,7 +41,7 @@ export default {
         let tileset = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
             url: 'http://122.70.158.52:8080/tdt/3dtile/tileset.json',
             // url: 'http://120.27.63.12:6080/south/tileset.json',
-            imageBasedLightingFactor: new Cesium.Cartesian2(5, 2),
+            imageBasedLightingFactor: new Cesium.Cartesian2(8, 2),
         }));
         tileset.readyPromise.then(() => {
             let translation=Cesium.Cartesian3.fromArray([0, 0, -180]);
