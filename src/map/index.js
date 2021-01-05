@@ -52,13 +52,27 @@ export default {
             // this.viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
             // this.setView({lon:113.06559697993666-0.0015,lat:22.64617101228423-0.0030,alt:250,pitch:-25, heading:-40});
             this.viewer.camera.flyTo({
-                destination : Cesium.Cartesian3.fromDegrees(113.06559697993666-0.0015, 22.64617101228423-0.0030, 400),
+                destination : Cesium.Cartesian3.fromDegrees(113.06559697993666-0.0005, 22.64617101228423-0.0070, 500),
                 orientation : {
                     heading : Cesium.Math.toRadians(-25),
                     pitch : Cesium.Math.toRadians(-40),
                 }
             })
         })
+    },
+    loadGaodeMapVEC () {
+        var layers = this.viewer.imageryLayers;
+        var gaodeMap = new Cesium.UrlTemplateImageryProvider({
+            url: 'http://{s}.is.autonavi.com/appmaptile?style=7&x={x}&y={y}&z={z}',
+            // url: 'http://wprd{s}.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scl=1&style=8&ltype=11',
+            credit: new Cesium.Credit('高德影像地图服务'),
+            subdomains: ['webst01', 'webst02', 'webst03', 'webst04'],
+            tilingScheme: new Cesium.WebMercatorTilingScheme(),
+            maximumLevel: 20,
+            show: false
+        });
+        var gaodeMapLayer = layers.addImageryProvider(gaodeMap);
+        return gaodeMapLayer;
     },
     setView (options){
         let m_options = options ? options : {};
