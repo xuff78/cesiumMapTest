@@ -20,7 +20,8 @@
     mounted(){
       mapControl.init('cesiumContainer')
       mapControl.loadGoogleMap()
-      mapControl.createModel('./Shadow_Tester_4.gltf', 200)
+      // mapControl.createModel('./Shadow_Tester_4.gltf', 200)
+      mapControl.add3DTile()
     },
     methods: {
       moveToMarker(){
