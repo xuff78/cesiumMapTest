@@ -5,6 +5,7 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 export default {
     config: new URLCONFIG(),
+    isFirst: true,
     init (id) {
         this.viewer = new Cesium.Viewer(id, {
             // terrainProvider: Cesium.createWorldTerrain()
@@ -17,6 +18,7 @@ export default {
         //         pitch : Cesium.Math.toRadians(-80.0),
         //     }
         // })
+        this.setView({lon:113.06559697993666-0.0015,lat:22.64617101228423-0.0030,alt:20000000,pitch:0, heading:0});
     },
     loadGoogleMap (options){
         options = options ? options : {}
@@ -38,27 +40,47 @@ export default {
         return googleMapLayer
     },
     add3DTile () {
-        let tileset = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
-            url: 'http://122.70.158.52:8080/tdt/3dtile/tileset.json',
-            // url: 'http://120.27.63.12:6080/south/tileset.json',
-            imageBasedLightingFactor: new Cesium.Cartesian2(8, 2),
-        }));
-        tileset.readyPromise.then(() => {
-            let translation=Cesium.Cartesian3.fromArray([0, 0, -180]);
-            let m = Cesium.Matrix4.fromTranslation(translation);
-            tileset._modelMatrix = m;
-            // let boundingSphere = tileset.boundingSphere;
-            // this.viewer.camera.viewBoundingSphere(boundingSphere, new Cesium.HeadingPitchRange(0.0, -0.5, boundingSphere.radius + 500.0));
-            // this.viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
-            // this.setView({lon:113.06559697993666-0.0015,lat:22.64617101228423-0.0030,alt:250,pitch:-25, heading:-40});
-            this.viewer.camera.flyTo({
-                destination : Cesium.Cartesian3.fromDegrees(113.06559697993666-0.0005, 22.64617101228423-0.0070, 500),
-                orientation : {
-                    heading : Cesium.Math.toRadians(-25),
-                    pitch : Cesium.Math.toRadians(-40),
+        let helper = new Cesium.EventHelper();
+        helper.add(this.viewer.scene.globe.tileLoadProgressEvent, (event) => {
+                if (event == 0) {
+                    if (this.isFirst) {
+                        this.isFirst = false
+                        let tileset = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+                            url: 'http://122.70.158.52:8080/tdt/3dtile/tileset.json',
+                            // url: 'http://120.27.63.12:6080/south/tileset.json',
+                            imageBasedLightingFactor: new Cesium.Cartesian2(8, 2),
+                        }));
+                        tileset.readyPromise.then(() => {
+                            let translation = Cesium.Cartesian3.fromArray([0, 0, -180]);
+                            let m = Cesium.Matrix4.fromTranslation(translation);
+                            tileset._modelMatrix = m;
+                            // let boundingSphere = tileset.boundingSphere;
+                            // this.viewer.camera.viewBoundingSphere(boundingSphere, new Cesium.HeadingPitchRange(0.0, -0.5, boundingSphere.radius + 500.0));
+                            // this.viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+                            // this.setView({lon:113.06559697993666-0.0015,lat:22.64617101228423-0.0030,alt:250,pitch:-25, heading:-40});
+                            setTimeout(() => {
+                                this.viewer.camera.flyTo({
+                                    destination: Cesium.Cartesian3.fromDegrees(113.06559697993666 - 0.0030, 22.64617101228423 - 0.0010, 1800),
+                                    orientation: {
+                                        heading: Cesium.Math.toRadians(0),
+                                        pitch: Cesium.Math.toRadians(-90),
+                                    },
+                                    complete: () => {
+                                        this.viewer.camera.flyTo({
+                                            destination: Cesium.Cartesian3.fromDegrees(113.06559697993666 - 0.0030, 22.64617101228423 - 0.0110, 800),
+                                            orientation: {
+                                                heading: Cesium.Math.toRadians(0),
+                                                pitch: Cesium.Math.toRadians(-40),
+                                            }
+                                        })
+                                    }
+                                })
+                            }, 1000)
+                        })
+                    }
                 }
-            })
         })
+
     },
     loadGaodeMapVEC () {
         var layers = this.viewer.imageryLayers;

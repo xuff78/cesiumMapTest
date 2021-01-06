@@ -19,8 +19,8 @@
     },
     mounted(){
       mapControl.init('cesiumContainer')
-      // mapControl.loadGoogleMap()
-      mapControl.loadGaodeMapVEC()
+      mapControl.loadGoogleMap()
+      // mapControl.loadGaodeMapVEC()
       // mapControl.createModel('./Shadow_Tester_4.gltf', 200)
       mapControl.add3DTile()
     },
